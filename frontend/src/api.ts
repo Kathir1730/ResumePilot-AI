@@ -1,4 +1,4 @@
-const BASE=import.meta.env.VITE_API_BASE||'http://127.0.0.1:8000';
+const BASE=import.meta.env.VITE_API_BASE || (import.meta.env.PROD ? 'https://resumepilot-api-lvf3.onrender.com' : 'http://127.0.0.1:8000');
 export type Change={id:number;section:string;original_text:string;proposed_text:string;rationale:string;status:'pending'|'approved'|'rejected'};
 export type Project={id:number;title:string;original_filename:string;original_text:string;job_description:string;changes:Change[];generation_mode?:string;notice?:string};
 export type Summary={id:number;title:string;original_filename:string;created_at:string};
