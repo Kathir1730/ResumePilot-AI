@@ -43,9 +43,10 @@ def _clean_lines(text):
     return lines
 
 def _heading(line):
-    normalized = re.sub(r"[:\s]+$", "", line.lower()).strip()
+    cleaned = re.sub(r"[:\s]+$", "", line).strip()
+    normalized = cleaned.lower()
     return normalized in SECTION_NAMES or (
-        len(normalized) < 32 and normalized.isupper() and any(ch.isalpha() for ch in normalized)
+        len(cleaned) < 32 and cleaned.isupper() and any(ch.isalpha() for ch in cleaned)
     )
 
 def _name_line(line):
