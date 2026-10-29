@@ -53,7 +53,11 @@ async def generate_one(pid: int, db: Session = Depends(get_db), u: User = Depend
     p = get_project(pid, u, db)
     try: changes, mode = await generate(p.original_text, p.job_description)
     except Exception as e: raise HTTPException(502, "Suggestion generation failed. Check API configuration and try again.") from e
-    # Remove stale demo placeholders created by earlier versions; keep user decisions intact.\n    for stale in db.query(Change).filter_by(project_id=p.id, status="pending").all():\n        if "Demo mode: unchanged placeholder" in (stale.rationale or ""):\n            db.delete(stale)\n    for x in changes: db.add(Change(project_id=p.id, section=x["section"], original_text=x["original_text"], proposed_text=x["proposed_text"], rationale=x["rationale"], status="pending"))
+    # Remove stale demo placeholders created by earlier versions; keep user decisions intact.
+    for stale in db.query(Change).filter_by(project_id=p.id, status="pending").all():
+        if "Demo mode: unchanged placeholder" in (stale.rationale or ""):
+            db.delete(stale)
+    for x in changes: db.add(Change(project_id=p.id, section=x["section"], original_text=x["original_text"], proposed_text=x["proposed_text"], rationale=x["rationale"], status="pending"))
     db.commit(); result = output(get_project(pid, u, db)); result["generation_mode"] = mode
     result["notice"] = "New suggestions are pending review. Original resume text is unchanged."
     return result
