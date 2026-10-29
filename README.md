@@ -1,5 +1,7 @@
 # ResumePilot AI
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Kathir1730/ResumePilot-AI)
+
 **AI-assisted resume tailoring with transparent, human-approved edits.**
 
 Upload a resume and a job description, review suggested edits side by side, and approve or reject each change before exporting.
@@ -64,7 +66,7 @@ Open the local Vite URL shown in the terminal, usually http://localhost:5173.
 Without an LLM API key, the backend returns an explicitly labeled demo placeholder; it does not perform real tailoring.
 
 ## Deploy
-GitHub stores the code; it does not run the full-stack app by itself.
+Use the **Deploy to Render** button at the top to review and deploy the Blueprint resources. GitHub stores the code; it does not run the full-stack app by itself.
 - Backend: Render (FastAPI and PostgreSQL)
 - Frontend: Vercel (set Root Directory to `frontend` and `VITE_API_BASE` to the deployed backend URL)
 - Set the backend's `FRONTEND_ORIGIN` to the exact deployed frontend origin.
