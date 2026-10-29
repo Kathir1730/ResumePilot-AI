@@ -14,7 +14,7 @@ from .ai import generate
 from .exports import render_text, docx_bytes, pdf_bytes
 load_dotenv(); Base.metadata.create_all(bind=engine)
 app = FastAPI(title="ResumePilot AI API", version="0.1.0")
-app.add_middleware(CORSMiddleware, allow_origins=[os.getenv("FRONTEND_ORIGIN", "http://127.0.0.1:5173"), "http://localhost:5173"], allow_origin_regex=r"https://.*\\.vercel\\.app", allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=[os.getenv("FRONTEND_ORIGIN", "http://127.0.0.1:5173"), "http://localhost:5173"], allow_origin_regex=r"https://.*\.vercel\.app", allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 class AuthIn(BaseModel):
     email: EmailStr
     password: str = Field(min_length=8, max_length=128)
